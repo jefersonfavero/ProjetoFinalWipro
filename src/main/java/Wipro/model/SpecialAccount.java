@@ -6,14 +6,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
-@PrimaryKeyJoinColumn(name="idConta")
-public class SpecialAccount extends Account{
+//@PrimaryKeyJoinColumn(name="idConta")
+public class SpecialAccount{
 	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private double limit;
+	private double limit;	
+	private String number;
+	private double balance;
+	private boolean status;
+    private String tipo;
+    @OneToOne //(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //JoinColumn(name = "id_servico", nullable = false)
+	private Client client;
+    @OneToOne
+	private Agency agency;
+    @OneToOne //(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinColumn(name = "credit_id")
+	private CreditCard creditcard;
 	
 	public double getLimit() {
 		return limit;

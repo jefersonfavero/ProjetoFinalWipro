@@ -11,7 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Entity
+//@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person{
 	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)

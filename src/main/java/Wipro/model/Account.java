@@ -11,11 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Entity
+//@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Account{
 	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)

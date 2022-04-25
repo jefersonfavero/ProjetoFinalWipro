@@ -30,15 +30,15 @@ public class ClientController {
 //		private EnderecoclientService clientServiceEndereco;
 
 	@GetMapping
-	public List<Client> GetAll() {
+	public ResponseEntity<List<Client>> GetAll() {
 		List<Client> clients = clientService.findAll();
-		return clients ;
+		return ResponseEntity.ok().body(clients);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Client> GetById(@PathVariable Long id) {
-		ResponseEntity<Client> obj = this.clientService.findById(id);
-		return ResponseEntity.ok(obj.getBody());//ResponseEntity.ok().body(obj);
+		Client obj = clientService.findById(id);
+		return ResponseEntity.status(200).body(obj);//ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
