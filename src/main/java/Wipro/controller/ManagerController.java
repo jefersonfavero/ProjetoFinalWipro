@@ -15,63 +15,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import Wipro.model.Client;
-import Wipro.servicee.ClientService;
+import Wipro.model.Manager;
+import Wipro.servicee.ManagerService;
 import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 @RestController
-@RequestMapping(path = "/client")
+@RequestMapping(path = "/Manager")
 @CrossOrigin("*")
-public class ClientController {
+public class ManagerController {
 
 	@Autowired
-	private ClientService clientService;
+	private ManagerService managerService;
 //		@Autowired
-//		private EnderecoclientService clientServiceEndereco;
+//		private EnderecomanagerService managerServiceEndereco;
 
 	@GetMapping
-	public ResponseEntity<List<Client>> GetAll() {
-		List<Client> clients = clientService.findAll();
-		return ResponseEntity.ok().body(clients);
+	public ResponseEntity<List<Manager>> GetAll() {
+		List<Manager> managers = managerService.findAll();
+		return ResponseEntity.ok().body(managers);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Client> GetById(@PathVariable Integer id) {
-		Client obj = clientService.findById(id);
+	public ResponseEntity<Manager> GetById(@PathVariable Integer id) {
+		Manager obj = managerService.findById(id);
 		return ResponseEntity.status(200).body(obj);//ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<Client> Post(@RequestBody Client Client) {
-		Client Obj = clientService.create(Client);
+	public ResponseEntity<Manager> Post(@RequestBody Manager manager) {
+		Manager Obj = managerService.create(manager);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(Obj.getId()).toUri();
 		System.out.println(uri);
-//			return ResponseEntity.status(HttpStatus.CREATED).body(clientService.create(Client));
+//			return ResponseEntity.status(HttpStatus.CREATED).body(managerService.create(Manager));
 		return ResponseEntity.created(uri).build();
 	}
 
-//		@PostMapping("/associarEnderecoClient/{id}")
-//		public ResponseEntity<Client> associarCurso(@PathVariable Integer idEndereco, @RequestBody Client Client) {
+//		@PostMapping("/associarEnderecoManager/{id}")
+//		public ResponseEntity<Manager> associarCurso(@PathVariable Integer idEndereco, @RequestBody Manager Manager) {
 //			
-//			Endereco endereco = clientServiceEndereco.findById(idEndereco);
-//			Client = clientService.findById(Client.getId());
+//			Endereco endereco = managerServiceEndereco.findById(idEndereco);
+//			Manager = managerService.findById(Manager.getId());
 //			
-//			endereco.getClients().add(Client);
-//			clientServiceEndereco.create(endereco);
+//			endereco.getManagers().add(Manager);
+//			managerServiceEndereco.create(endereco);
 //			
-//			return ResponseEntity.status(200).body(Client);
+//			return ResponseEntity.status(200).body(Manager);
 //			
 //		}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Client> Put(@PathVariable Long id, @RequestBody Client client) {
-		Client obj = clientService.update(id, client);
+	public ResponseEntity<Manager> Put(@PathVariable Integer id, @RequestBody Manager manager) {
+		Manager obj = managerService.update(id, manager);
 		return ResponseEntity.status(200).body(obj);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> Delete(@PathVariable Long id) {
-		clientService.delete(id);
+	public ResponseEntity<Void> Delete(@PathVariable Integer id) {
+		managerService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 

@@ -20,7 +20,7 @@ public class ClientService {
 	}
 
 	//@GetMapping getById
-	public ResponseEntity<Client> findById(Long id) {
+	public ResponseEntity<Client> findById(Integer id) {
 		Optional<Client> obj = clientRepository.findById(id);
 		if (obj.isPresent()) {
 			return ResponseEntity.ok(obj.get());
