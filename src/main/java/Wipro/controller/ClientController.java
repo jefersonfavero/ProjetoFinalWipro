@@ -17,9 +17,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import Wipro.model.Client;
 import Wipro.servicee.ClientService;
+import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 @RestController
-@RequestMapping(path = "/Client")
+@RequestMapping(path = "/client")
 @CrossOrigin("*")
 public class ClientController {
 
@@ -40,16 +41,14 @@ public class ClientController {
 		return ResponseEntity.ok(obj.getBody());//ResponseEntity.ok().body(obj);
 	}
 
-//	@PostMapping
-//	public ResponseEntity<Client> Post(@RequestBody Client Client) {
-//		Client newObj = clientService.create(Client);
-//
-//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
-//		System.out.println(uri);
-//
-////			return ResponseEntity.status(HttpStatus.CREATED).body(clientService.create(Client));
-//		return ResponseEntity.created(uri).build();
-//	}
+	@PostMapping
+	public ResponseEntity<Client> Post(@RequestBody Client Client) {
+		Client Obj = clientService.create(Client);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(Obj.getId()).toUri();
+		System.out.println(uri);
+//			return ResponseEntity.status(HttpStatus.CREATED).body(clientService.create(Client));
+		return ResponseEntity.created(uri).build();
+	}
 
 //		@PostMapping("/associarEnderecoClient/{id}")
 //		public ResponseEntity<Client> associarCurso(@PathVariable Integer idEndereco, @RequestBody Client Client) {
@@ -64,16 +63,16 @@ public class ClientController {
 //			
 //		}
 
-//	@PutMapping("/{id}")
-//	public ResponseEntity<Client> Put(@PathVariable String id, @RequestBody Client obj) {
-//		Client newClient = clientService.update(id, obj);
-//		return ResponseEntity.status(200).body(newClient);
-//	}
-//
-//	@DeleteMapping("/{id}")
-//	public ResponseEntity<Void> Delete(@PathVariable String id) {
-//		clientService.delete(id);
-//		return ResponseEntity.noContent().build();
-//	}
+	@PutMapping("/{id}")
+	public ResponseEntity<Client> Put(@PathVariable Long id, @RequestBody Client client) {
+		Client obj = clientService.update(id, client);
+		return ResponseEntity.status(200).body(obj);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> Delete(@PathVariable Long id) {
+		clientService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 
 }
