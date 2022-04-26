@@ -3,6 +3,9 @@ package Wipro.model;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,23 +18,22 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-//@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)               
 public abstract class Account{
-	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 	private String number;
 	private double balance;
 	private boolean status;
     private String tipo;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_servico", nullable = false)
+    @OneToOne//(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "id_servico", nullable = false)
 	private Client client;
     @OneToOne
 	private Agency agency;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "credit_id")
+    @OneToOne//(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "credit_id")
 	private CreditCard creditcard;
     
 	public Integer getId() {
